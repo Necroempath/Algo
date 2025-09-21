@@ -1,11 +1,16 @@
-﻿namespace AlgorithmicLab;
+﻿using AlgorithmicLab.SubarrayMaxSum;
+
+namespace AlgorithmicLab;
 
 class Program
 {
     static void Main(string[] args)
     {
-        Program program = new();
-        Console.WriteLine(program.IsPolydrome(2112));
+        // Program program = new();
+        // Console.WriteLine(program.IsPolydrome(2112));
+        SubarrayResolver subarray = new([1, -2, 3, 5, -1]);
+    
+        Console.WriteLine(subarray.MaxElementValue + " and " + subarray.MaxElementIndex);
     }
 
     bool IsPolydrome(int num)
