@@ -18,6 +18,7 @@ public class SubarrayResolver
         _maxElementIndex = 0;
 
         CalculateMaxElementValueAndIndex();
+        CalculateSubarray();
     }
 
     public void CalculateMaxElementValueAndIndex()
@@ -32,34 +33,45 @@ public class SubarrayResolver
         }
     }
     
-    public int GetSubarrayMaxSum()
+    public void CalculateSubarray()
     {
-        int sequenceLength = 0;
-        int index = 0;
+        int sequenceLength = 1;
+        int index = _maxElementIndex;
         int sum = 0;
+        int maxSubarrayIndex = _maxElementIndex;
+        int maxSubarrayValue = _maxElementValue;
+        int maxSequenceLength = 1;
         
         for (int i = 0; i < _arr.Length; i++)
         {
             if (_arr[i] > 0)
             {
                 sum += _arr[i];
-                index = index == _maxElementIndex ? index : i;
-                sequenceLength++;
+                
+                if (index < 0) index = i;
+
+                else sequenceLength++;
             }
             else
             {
-                _maxElementValue = _maxElementValue > sum ? _maxElementValue : sum;
+                if (sum > maxSubarrayValue)
+                {
+                    maxSubarrayIndex = index;
+                    maxSubarrayValue = sum;
+                    maxSequenceLength = sequenceLength;
+                }
+                
                 sum = 0;
-                index = _maxElementIndex;
-                sequenceLength = 0;
+                index = -1;
+                sequenceLength = 1;
             }
         }
-        _subarray = new int[sequenceLength];
 
-        for (int i = index; i < sequenceLength + index; i++)
+        _subarray = new int[maxSequenceLength];
+
+        for (int i = 0; i < maxSequenceLength; i++)
         {
-            _subarray[i] = _arr[i];
+            _subarray[i] = _arr[i + maxSubarrayIndex];
         }
-        return _maxElementValue;
     }
 }

@@ -8,9 +8,12 @@ class Program
     {
         // Program program = new();
         // Console.WriteLine(program.IsPolydrome(2112));
-        SubarrayResolver subarray = new([1, -2, 3, 5, -1]);
-    
-        Console.WriteLine(subarray.MaxElementValue + " and " + subarray.MaxElementIndex);
+        SubarrayResolver subarray = new([1, -2, 3, 5, 3, -1, 9]);
+
+        for (int i = 0; i < subarray.Subarray.Length; i++)
+        {
+            Console.Write(subarray.Subarray[i] + " ");
+        }
     }
 
     bool IsPolydrome(int num)
